@@ -26,8 +26,17 @@
   #include "windows.h"
 #endif
 
+#ifdef __APPLE__
+
+#include <OpenGL/gl.h>
+#include <OpenGL/glu.h>
+
+#else
+
 #include <GL/gl.h>
 #include <GL/glu.h>
+
+#endif
 
 #ifndef WIN32
 #  define CALLBACK
@@ -88,7 +97,7 @@ void CALLBACK tessEdgeFlag(GLboolean flag, void * polygon_data) {
 }
 
 void CALLBACK tessError(GLenum err) {
-    cout << "error: " << gluErrorString(err) << endl;
+    std::cerr << "error: " << gluErrorString(err) << endl;
 }
 
 void CALLBACK tessCombineData(GLdouble newVert[3], GLdouble *neighbourVert[4], GLfloat neighborWeight[4], void **outData, void * polygon_data)
